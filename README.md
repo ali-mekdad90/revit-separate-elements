@@ -15,23 +15,26 @@ The tool also provides options to control selected operations during processing 
 ## Key Features
 
 - **Wall Layer Separation:** Separates existing compound Walls into individual layer elements.
-- **Floor Layer Separation:** Applies the separation workflow to existing compound Floors.
-- **Level-Based Processing:** Allows users to select a Level to process, limiting the scope of operations and helping avoid long-running tasks on older hardware.
+- **Floor Layer Separation:** Applies the same layer-separation workflow to existing compound Floors.
+- **Level-Based Processing:** Filters elements by their associated Level, allowing users to limit processing scope and helping reduce the risk of long-running operations on older hardware.
 - **Configurable Layer Naming:** Allows users to define default names for the different layer types found in the original compound elements.
-- **Parameter Transfer:** Copies parameters from the original element to newly created layer elements.
-- **Wall Join Restoration:** Attempts to restore joins between walls that were originally joined, joining compatible layers where possible.
-- **Configurable Processing Operations:** Lets users choose which supported operations to perform during separation.
+- **Parameter Transfer:** Copies the original element's parameters to newly created layer elements, excluding parameters that affect geometry.
+- **Geometry Preservation:** Creates individual layer elements at the corresponding original layer locations, preserving the original layer geometry.
+- **Conditional Wall-Join Restoration:** Attempts to restore joins between walls that were joined before separation, joining compatible layers where possible.
+- **Configurable Processing Operations:** Allows users to choose which supported operations to perform during the separation process.
 - **Execution Reporting:** Reports processing results to the user.
 
 ## How It Works
 
-1. **Select a Level:** Choose the Level whose elements should be processed.
+1. **Select a Level:** Choose the Level whose associated elements should be processed.
 2. **Configure Layer Names:** Define default names for the layer types identified in the original compound elements.
-3. **Choose the Operation:** Select whether to separate Walls or Floors.
-4. **Configure Processing Options:** Enable or disable the supported operations, such as parameter transfer and wall-join restoration.
-5. **Execute Separation:** The add-in creates individual elements for the compound structure's layers at their corresponding original locations.
-6. **Replace Original Elements:** After processing, the original compound elements are removed.
-7. **Review the Results:** The add-in reports the execution results.
+3. **Choose the Element Type:** Select whether to process Walls or Floors.
+4. **Configure Processing Options:** Choose which supported operations to perform during separation.
+5. **Create Individual Layer Elements:** The add-in creates new elements corresponding to the original compound element's layers, positioning them to preserve the original layer geometry.
+6. **Transfer Parameters:** Copies applicable parameters from the original element to the newly created layer elements, excluding geometry-affecting parameters.
+7. **Restore Wall Joins Where Applicable:** For Walls that were joined before separation, the add-in attempts to restore joins between compatible corresponding layers.
+8. **Remove Original Elements:** Removes the original compound elements as part of the replacement workflow.
+9. **Review Execution Results:** Displays a report of the processing results.
 
 ## Technical Highlights
 
@@ -39,16 +42,24 @@ The tool also provides options to control selected operations during processing 
 - **Platform:** Autodesk Revit API
 - **User Interface:** Windows Presentation Foundation (WPF)
 - **Primary Target Version:** Autodesk Revit 2021
-- **BIM Automation:** Automated element creation, parameter transfer, and wall-join handling.
-- **Performance Considerations:** Level-based processing to limit the scope of operations and reduce the risk of unresponsive behavior on older machines.
+- **Element Processing:** Level-based filtering using each element's associated Level.
+- **Parameter Management:** Transfers non-geometry-affecting parameters from original elements to generated layer elements.
+- **Geometry Handling:** Preserves the original layer geometry when generating individual elements.
+- **Wall-Join Handling:** Attempts to restore original wall-join relationships between compatible layers when the original walls were joined.
+- **Performance Considerations:** Allows users to restrict processing to a selected Level, helping keep operations manageable on older hardware.
 
 ## Results and Impact
 
-The add-in was developed to reduce the manual effort involved in converting compound Wall and Floor elements into individual layer elements.
+The add-in automates the separation of compound Walls and Floors into individual layer elements, reducing repetitive manual modeling work.
 
-**Reported productivity improvement: approximately 75% time saved** in the relevant wall-separation workflow.
+**Reported productivity improvement: approximately 75% time saved** across the Wall and Floor separation workflows.
 
-This figure reflects the reported result and should be treated as an approximate workflow-specific measurement rather than a universal benchmark.
+This is an approximate, workflow-specific result based on the reported experience with the tool, rather than a universal performance benchmark.
+
+## Compatibility
+
+- **Primary target:** Autodesk Revit 2021.
+- Compatibility with other Revit versions has not yet been established in this documentation.
 
 ## Demonstration
 
@@ -61,10 +72,6 @@ Screenshots and a short video demonstration will be added to illustrate:
 - Parameter transfer and wall-join restoration, where applicable.
 - The execution report.
 
-## Compatibility
-
-- **Primary target:** Autodesk Revit 2021.
-- The add-in was designed primarily for Revit 2021. Compatibility with other Revit versions has not yet been established in this documentation.
 
 ## Source Code
 
